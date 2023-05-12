@@ -25,16 +25,14 @@ class UsersApi {
 
 
 class PostApi {
-  Future<List<Posts>> getUsers() async{
+  Future<List<Posts>> getPosts() async{
     var url = "${baseUrl}posts";
     final response = await get(Uri.parse(url));
 
-    if(response.statusCode < 400){
+    if(response.statusCode == 200){
      
-      var userDetails = Users.userDetailsFromJson(
-        jsonDecode(response.body)
-      );
-      return userDetails;
+     
+      return Users.userDetailsFromJson(jsonDecode(response.body));
     }else{
      throw Exception ('Failed to load data!');
     }
